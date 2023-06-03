@@ -1,0 +1,37 @@
+---
+#tasks file for apache2
+# - name: Install Apache package Ubuntu
+#   package:
+#     name: "{{ apache }}"
+#     state: present
+
+# - name: Start and enable the service
+#   service:
+#     name: "{{ apache }}"
+#     state: started
+#     enabled: yes
+
+# - name: Coppy Hello!
+#   template:
+#     src: "templates/index.html.j2"
+#     dest: "/var/www/html/index.html"
+#   notify: Restart Apache
+
+
+# - name: Check the welcome page
+#   shell: curl "{{ inventory_hostname }}"
+#   register: result
+
+# - name: Display welcome page
+#   debug:
+#     msg: "{{ result.stdout }}"
+#   delegate_to: localhost
+
+- name: Copy script over to ubuntu nodes
+  copy:
+    src: install.sh
+    dest: /opt/setup/
+    mode: 0755
+
+- name: Running openprot
+  shell: /opt/setup/openport.sh
